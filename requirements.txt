@@ -9,7 +9,7 @@ pubchempy == 1.0.4
 rdkit
 matplotlib == 3.5.2
 seaborn == 0.11.2
-gensim==3.8.0
+gensim
 Pillow == 9.4.0
 tqdm == 4.64.1
 IPython == 7.31.1
