@@ -47,6 +47,7 @@ if selected_mode == "Single Mode":
         # Create dataframe 
         X1 = np.array([x.vec for x in df1['mol2vec']])  
         X = pd.concat((pd.DataFrame(X1), df1.drop(['mol2vec', 'mol', 'sentence', 'Smiles'], axis=1)), axis=1)
+        st.write(X)
     # Load pretrained model
         model = joblib.load('model_fyn.pkl')
         y_prediction = model.predict(X.values)
