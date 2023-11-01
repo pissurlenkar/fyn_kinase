@@ -35,7 +35,7 @@ selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch 
 if selected_mode == "Single Mode":
     smiles_input = st.text_input("Enter your structure!")
     if st.button('Result'): 
-        df1 = pd.DataFrame({'Smiles':smiles_input})
+        df1 = pd.DataFrame({'Smiles': [smiles_input]})
         df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
         df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
         # Calculate mol2vec descriptors
