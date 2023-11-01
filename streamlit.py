@@ -22,30 +22,50 @@ import random
 import requests
 import io
 
+df = pd.read_csv('Fyn_kinase.csv')
+Predict_Result1 = ''
+results1 = []
 
 st.title('FYN KINASE SCREENING')
 
 # Create a radio button to choose the mode
-selected_mode = st.selectbox("Select Mode", ["Single Mode", "Batch Mode"])
+selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch Mode"])
 
 # Depending on the user's choice, display different content
 if selected_mode == "Single Mode":
-    st.write("You are in Single Mode.")
-    # Add code for single mode here
+    smiles_input = st.text_area("Enter your structure!")
+    if st.button('Result'): 
+        df1 = pd.DataFrame({'Smiles':smiles_input})
+        df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
+        df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
+        # Calculate mol2vec descriptors
+        from mol2vec.features import mol2alt_sentence, mol2sentence, MolSentence, DfVec, sentences2vec
+        from gensim.models import word2vec
+        w2vec_model = word2vec.Word2Vec.load('model_300dim.pkl')
+        df1['sentence'] = df1.apply(lambda x: MolSentence(mol2alt_sentence(x['mol'], 1)), axis=1)
+        df1['mol2vec'] = [DfVec(x) for x in sentences2vec(df1['sentence'], w2vec_model, unseen='UNK')]
+        # Create dataframe 
+        X1 = np.array([x.vec for x in df1['mol2vec']])  
+        X = pd.concat((pd.DataFrame(X1), df1.drop(['mol2vec', 'mol', 'sentence', 'Smiles'], axis=1)), axis=1)
+    # Load pretrained model
+        model = joblib.load('model.pkl')
+        y_prediction = model.predict(X.values)
+        probs1 = np.round(model.predict_proba(X.values)[:, 1] * 100, 2)
+        probs0 = np.round(model.predict_proba(X.values)[:, 0] * 100, 2)
+        if y_prediction[0] == 1:
+            result = ('Your compound is active with probality of', f'{probs1[0]}%')
+        else:
+            result = ('Your compound is inactive with probality of', f'{probs0[0]}%')
+        st.success(result)
 else:
     st.write("You are in Batch Mode.")
 
-smiles_input = st.text_area("Enter your structure!")
 
 data_entries = []
 if smiles_input:
     entries = smiles_input.split('\n')
     
     data_entries.extend(entries)
-    
-df = pd.read_csv('Fyn_kinase.csv')
-Predict_Result1 = ''
-results1 = []
 
 if st.button('Result') and data_entries: 
     #longle = df.loc[(df['Smiles'] == smiles_input)]
