@@ -32,10 +32,6 @@ if smiles_input:
     entries = smiles_input.split('\n')
     
     data_entries.extend(entries)
-
-st.write("Các công thức smiles bạn đã nhập:")
-for smiles in data_entries:
-    st.write(smiles)
     
 df = pd.read_csv('Fyn_kinase.csv')
 Predict_Result1 = ''
@@ -60,7 +56,7 @@ if st.button('Result') and data_entries:
                                                'mol',
                                               'sentence', 'Smiles'], axis=1)), axis=1)
 # Load pretrained model
-             model = joblib.load('Desktop/model.pkl')
+             model = joblib.load('model.pkl')
               
              y_prediction = model.predict(X.iloc[[i]].values)
              probs1 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 1] * 100, 2)
