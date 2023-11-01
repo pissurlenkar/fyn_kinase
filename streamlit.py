@@ -25,6 +25,16 @@ import io
 
 st.title('FYN KINASE SCREENING')
 
+# Create a radio button to choose the mode
+selected_mode = st.selectbox("Select Mode", ["Single Mode", "Batch Mode"])
+
+# Depending on the user's choice, display different content
+if selected_mode == "Single Mode":
+    st.write("You are in Single Mode.")
+    # Add code for single mode here
+else:
+    st.write("You are in Batch Mode.")
+
 smiles_input = st.text_area("Enter your structure!")
 
 data_entries = []
