@@ -23,22 +23,20 @@ import requests
 import io
 
 
-st.title('BỘ MÔN DƯỢC LIỆU')
+st.title('FYN KINASE SCREENING')
 
-smiles_input = st.text_area("Nhập các công thức smiles:", "CCO\nCC(=O)OC1=CC=CC=C1C(=O)O")
+smiles_input = st.text_area("Enter your structure!")
 
 data_entries = []
 if smiles_input:
-    # Chia dữ liệu đầu vào thành các mục riêng lẻ (ngăn cách bằng dấu xuống dòng)
     entries = smiles_input.split('\n')
     
     data_entries.extend(entries)
-# Hiển thị danh sách các công thức smiles
-st.write("Các công thức smiles bạn đã nhập:")
+
 for smiles in data_entries:
     st.write(smiles)
     
-df = pd.read_csv('C:/Users/WINDOWS/Fyn_kinase.csv')
+df = pd.read_csv('Fyn_kinase.csv')
 Predict_Result1 = ''
 results1 = []
 
@@ -61,7 +59,7 @@ if st.button('Result') and data_entries:
                                                'mol',
                                               'sentence', 'Smiles'], axis=1)), axis=1)
 # Load pretrained model
-             model = joblib.load('Desktop/model100.pkl')
+             model = joblib.load('Desktop/model_fyn.pkl')
               
              y_prediction = model.predict(X.iloc[[i]].values)
              probs1 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 1] * 100, 2)
