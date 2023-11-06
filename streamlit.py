@@ -113,9 +113,9 @@ else:
             probs1 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 1] * 100, 2)
             probs0 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 0] * 100, 2)
             if y_prediction[0] == 1:
-                result = ('Active', f'{probs1[0]}%')
+                result = ('active', f'{probs1[0]}%')
             else:
-                result = ('Inactive', f'{probs0[0]}%')
+                result = ('inactive', f'{probs0[0]}%')
             results1.append(result)
         for i, (prediction, probability) in enumerate(results1):
             st.success(f'Compound {i + 1} is {prediction} with probality of {probability}')
