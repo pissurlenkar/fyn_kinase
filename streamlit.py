@@ -57,4 +57,3 @@ if selected_mode == "Single Mode":
         else:
             result = f'Your compound is inactive with probality of {probs0[0]}%'
         st.success(result)
-        st.success(y_prediction)
