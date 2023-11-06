@@ -43,7 +43,8 @@ threshold = Dk + 0.5 * Sk
 
 
 Predict_Result1 = ''
-results1 = []
+activity = []
+probability = []
 
 def convert_df(df):
     return df.to_csv().encode('utf-8')  
@@ -113,11 +114,15 @@ else:
             probs1 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 1] * 100, 2)
             probs0 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 0] * 100, 2)
             if y_prediction[0] == 1:
-                activity = 'Active'
-                probability = probs1[0]
+                act = 'Active'
+                activity.append(act)
+                probs = probs1[0]
+                probability.append(probs)
             else:
                 activity = 'Inactive'
+                activity.append(act)
                 probability = probs0[0]
+                probability.append(probs)
         df3 = pd.DataFrame({
             'Compound': data_entries,
             'Predicted Activity': activity,
