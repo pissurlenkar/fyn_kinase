@@ -24,36 +24,6 @@ import io
 import subprocess
 from xgboost import XGBClassifier
 
-#For fun
-import random
-import time
-
-# Define a list of random quotes
-quotes = [
-    "Quote 1: 'The only way to do great work is to love what you do.' - Steve Jobs",
-    "Quote 2: 'Success is not final, failure is not fatal: It is the courage to continue that counts.' - Winston Churchill",
-    "Quote 3: 'The best way to predict the future is to create it.' - Peter Drucker",
-    # Add more quotes here
-]
-
-# Function to display a random quote
-def display_random_quote():
-    random_quote = random.choice(quotes)
-    st.write(random_quote)
-
-# Function to simulate a time-consuming task with a progress bar
-def simulate_work():
-    progress_bar = st.progress(0)
-    total_duration = 10.0  # Adjust the total duration of your task (in seconds)
-    start_time = time.time()
-
-    while time.time() - start_time < total_duration:
-        elapsed_time = time.time() - start_time
-        progress = elapsed_time / total_duration
-        progress_bar.progress(progress)
-        time.sleep(0.1)  # Adjust the update frequency of the progress bar
-
-    st.empty()  # Remove the progress bar
 
 # Calculate Application Domain
 df = pd.read_csv('Fyn_kinase.csv')
@@ -91,8 +61,6 @@ selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch 
 if selected_mode == "Single Mode":
     smiles_input = st.text_input("Enter your structure!")
     if st.button('Result'):
-        display_random_quote()  # Display a random quote
-        simulate_work()  # Simulate a time-consuming task
         df1 = pd.DataFrame({'Smiles': smiles_input},index=[0])
         df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
         df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
@@ -128,8 +96,6 @@ else:
         entries = smiles_input.split('\n')        
         data_entries.extend(entries)
     if st.button('Result'):
-        display_random_quote()  # Display a random quote
-        simulate_work()  # Simulate a time-consuming task
         df1 = pd.DataFrame({'Smiles': data_entries})
         for i in range(len(df1)):
             df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
