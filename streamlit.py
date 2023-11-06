@@ -61,6 +61,7 @@ if selected_mode == "Single Mode":
         #Application of Domain
         distances, indices = knn_model.kneighbors(X)
         Di = np.mean(distances[0])
+        st.success(Di)
         if Di > threshold:
             result = 'Your compound is out of our application domain'
         else:
