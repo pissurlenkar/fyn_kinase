@@ -110,7 +110,7 @@ else:
                                                    'mol',
                                                   'sentence', 'Smiles'], axis=1)), axis=1)
             
-            distances_screen,_ = knn_model.kneighbors(X)
+            distances_screen,_ = knn_model.kneighbors(X.iloc[[i]])
             Di = np.mean(distances_screen)
             
             if Di > threshold:
@@ -122,14 +122,15 @@ else:
                 model = joblib.load('model_fyn.pkl')                 
                 y_prediction = model.predict(X.iloc[[i]].values)
                 probs1 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 1] * 100, 2)
-                probs0 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 0] * 100, 2)
-                note = ''
+                probs0 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 0] * 100, 2)                
                 if y_prediction[0] == 1:
                     act = 'Active'
                     probs = probs1[0]
+                    note = ''
                 else:
                     act = 'Inactive'
                     probs = probs0[0]
+                    note = ''
 
             probability.append(probs)
             activity.append(act)
