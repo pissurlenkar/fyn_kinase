@@ -23,11 +23,8 @@ import requests
 import io
 import subprocess
 from xgboost import XGBClassifier
-import random
-import time
 
 #For fun
-import streamlit as st
 import random
 import time
 
@@ -125,8 +122,8 @@ else:
         entries = smiles_input.split('\n')        
         data_entries.extend(entries)
     if st.button('Result'):
-        display_random_quote()  # Display a random quote
-        simulate_work()  # Simulate a time-consuming task
+        #display_random_quote()  # Display a random quote
+        #simulate_work()  # Simulate a time-consuming task
         df1 = pd.DataFrame({'Smiles': data_entries})
         for i in range(len(df1)):
             df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
