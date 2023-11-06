@@ -44,9 +44,15 @@ def display_random_quote():
 # Function to simulate a time-consuming task with a progress bar
 def simulate_work():
     progress_bar = st.progress(0)
-    for i in range(101):
-        time.sleep(0.1)  # Simulate some work being done
-        progress_bar.progress(i)
+    total_duration = 10.0  # Adjust the total duration of your task (in seconds)
+    start_time = time.time()
+
+    while time.time() - start_time < total_duration:
+        elapsed_time = time.time() - start_time
+        progress = elapsed_time / total_duration
+        progress_bar.progress(progress)
+        time.sleep(0.1)  # Adjust the update frequency of the progress bar
+
     st.empty()  # Remove the progress bar
 
 # Calculate Application Domain
