@@ -118,8 +118,7 @@ else:
                 probs = probs1[0]
             else:
                 act = 'Inactive'
-                activity.append(act)
-                probability = probs0[0]
+                probs = probs0[0]
 
             probability.append(probs)
             activity.append(act)
