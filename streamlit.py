@@ -69,7 +69,6 @@ if selected_mode == "Single Mode":
         #Application of Domain
         distances_screen,_ = knn_model.kneighbors(X)
         Di = np.mean(distances_screen)
-        st.success(Di)
         if Di > threshold:
             result = 'Your compound is out of our application domain'
         else:
@@ -87,16 +86,13 @@ else:
     smiles_input = st.text_area('Enter your structures!')
     data_entries = []
     if smiles_input:
-        # Chia dữ liệu đầu vào thành các mục riêng lẻ (ngăn cách bằng dấu xuống dòng)
         entries = smiles_input.split('\n')        
         data_entries.extend(entries)
-    # Hiển thị danh sách các công thức smiles
     if st.button('Result'):
         df1 = pd.DataFrame({'Smiles': data_entries},index=[0])
         for i in range(len(df1)):
             df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
             df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
-        #
             from mol2vec.features import mol2alt_sentence, mol2sentence, MolSentence, DfVec, sentences2vec
             from gensim.models import word2vec
             w2vec_model = word2vec.Word2Vec.load('model_300dim.pkl')
@@ -109,7 +105,7 @@ else:
                                                    'mol',
                                                   'sentence', 'Smiles'], axis=1)), axis=1)
             # Load pretrained model
-            model = joblib.load('Desktop/model100.pkl')                 
+            model = joblib.load('Desktop/model_fyn.pkl')                 
             y_prediction = model.predict(X.iloc[[i]].values)
             probs1 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 1] * 100, 2)
             probs0 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 0] * 100, 2)
