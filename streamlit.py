@@ -107,7 +107,7 @@ else:
                 result = ('Active', f'{probs1[0]}%')
             else:
                 result = ('Inactive', f'{probs0[0]}%')
-                 results1.append(result)
+            results1.append(result)
     for i, (prediction, probability) in enumerate(results1):
         st.success(f'Kết quả dự đoán cho hàng {i + 1}: {prediction}. Xác suất: {probability}')
     #Hiển thị dataframe
