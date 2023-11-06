@@ -28,6 +28,9 @@ y = df['Activity'].values
 X_model = df.iloc[:, 0:100]
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X_model, y, test_size=0.3, random_state = 42)
+from imblearn.over_sampling import SVMSMOTE
+svmsmote = SVMSMOTE(random_state=42)
+X_train, y_train = svmsmote.fit_resample(X_train, y_train)
 from sklearn.neighbors import NearestNeighbors
 k = 5
 knn_model = NearestNeighbors(n_neighbors=k)
