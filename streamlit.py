@@ -23,6 +23,7 @@ import requests
 import io
 from xgboost import XGBClassifier
 
+# Calculate Application Domain
 df = pd.read_csv('Fyn_kinase.csv')
 y = df['Activity'].values
 X_model = df.iloc[:, 0:100]
@@ -67,9 +68,8 @@ if selected_mode == "Single Mode":
         X = pd.concat((pd.DataFrame(X1), df1.drop(['mol2vec', 'mol', 'sentence', 'Smiles'], axis=1)), axis=1)
         #Application of Domain
         distances, indices = knn_model.kneighbors(X)
-        Di = np.mean(distances[0])
+        Di = np.mean(distances)
         st.success(Di)
-        st.success(threshold)
         if Di > threshold:
             result = 'Your compound is out of our application domain'
         else:
