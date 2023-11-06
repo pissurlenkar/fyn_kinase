@@ -45,6 +45,9 @@ threshold = Dk + 0.5 * Sk
 Predict_Result1 = ''
 results1 = []
 
+def convert_df(df):
+    return df.to_csv().encode('utf-8')  
+
 st.title('FYN KINASE SCREENING')
 
 # Create a radio button to choose the mode
@@ -119,12 +122,9 @@ else:
         #Hiển thị dataframe
         df3 = pd.DataFrame(results1)
         st.dataframe(df3)
-    # Xuất file
-    def convert_df(df):
-        return df.to_csv().encode('utf-8')  
-    csv = convert_df(pd.DataFrame(results1, columns=['Prediction', 'Probability']))
+        # Save as csv file
+        csv = convert_df(pd.DataFrame(results1, columns=['Prediction', 'Probability']))
 
-    st.download_button(label="Download results as CSV file",
+        st.download_button(label="Download results as CSV file",
                         data=csv, file_name='Results.csv',
-                        mime='text/csv',
-                    )
+                        mime='text/csv')
