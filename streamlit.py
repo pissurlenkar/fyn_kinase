@@ -123,7 +123,7 @@ else:
         df3 = pd.DataFrame(results1)
         st.dataframe(df3)
         # Save as csv file
-        csv = convert_df(pd.DataFrame(results1, columns=['Compound', 'Prediction', 'Probability']))
+        csv = convert_df(pd.DataFrame(results1, columns=['Prediction', 'Probability']))
 
         st.download_button(label="Download results as CSV file",
                         data=csv, file_name='Results.csv',
