@@ -113,30 +113,17 @@ else:
             probs1 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 1] * 100, 2)
             probs0 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 0] * 100, 2)
             if y_prediction[0] == 1:
-                #result = ('active', f'{probs1[0]}%')
-                activity = 'active'
+                activity = 'Active'
                 probability = probs1[0]
             else:
-                activity = 'inactive'
+                activity = 'Inactive'
                 probability = probs0[0]
-                #result = ('inactive', f'{probs0[0]}%')
-            #results1.append(result)
-        #for i, (prediction, probability) in enumerate(results1):
-            #st.success(f'Compound {i + 1} is {prediction} with probality of {probability}')
-        #Hiển thị dataframe
-        #df3 = pd.DataFrame(results1)
         df3 = pd.DataFrame({
             'Compound': data_entries,
             'Predicted Activity': activity,
-            'Probability': probability,
+            'Probability (%)': probability,
             })
         st.dataframe(df3)
-        # Save as csv file
-        #csv = convert_df(pd.DataFrame(results1, columns=['Column', 'Prediction', 'Probability']))
-
-        #st.download_button(label="Download results as CSV file",
-         #               data=csv, file_name='Results.csv',
-          #              mime='text/csv')
         st.download_button(
             label="Download results as CSV file",
             data=df3.to_csv(index=False),
