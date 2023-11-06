@@ -24,9 +24,9 @@ import io
 
 df = pd.read_csv('Fyn_kinase.csv')
 y = df['Activity'].values
-X = df.iloc[:, 0:100]
+X_model = df.iloc[:, 0:100]
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state = 42)
+X_train, X_test, y_train, y_test = train_test_split(X_momdel, y, test_size=0.3, random_state = 42)
 from sklearn.neighbors import NearestNeighbors
 k = 5
 knn_model = NearestNeighbors(n_neighbors=k)
@@ -44,6 +44,9 @@ selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch 
 # Depending on the user's choice, display different content
 if selected_mode == "Single Mode":
     smiles_input = st.text_input("Enter your structure!")
+    if st.button('Example'):
+        smiles_input = 'COc1ccc(CNC(=O)c2cc3c4ccccc4n4c(=O)c5ccccc5c(n2)c34)cc1'
+        
     if st.button('Result'):
         df1 = pd.DataFrame({'Smiles': smiles_input},index=[0])
         df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
@@ -73,6 +76,3 @@ if selected_mode == "Single Mode":
             else:
                 result = f'Your compound is inactive with probality of {probs0[0]}%'
         st.success(result)
-
-if selected_mode == "Batch Mode":
-    
