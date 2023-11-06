@@ -91,9 +91,8 @@ else:
     if smiles_input:
         entries = smiles_input.split('\n')        
         data_entries.extend(entries)
-        st.success(data_entries)
     if st.button('Result'):
-        df1 = pd.DataFrame({'Smiles': data_entries},index=[0])
+        df1 = pd.DataFrame({'Smiles': data_entries})
         for i in range(len(df1)):
             df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
             df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
