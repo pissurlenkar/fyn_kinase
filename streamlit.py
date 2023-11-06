@@ -72,6 +72,7 @@ if selected_mode == "Single Mode":
                 result = f'Your compound is active with probality of {probs1[0]}%'
             else:
                 result = f'Your compound is inactive with probality of {probs0[0]}%'
+        st.success(result)
     if st.button('Example'):
         smiles_input = 'COc1ccc(CNC(=O)c2cc3c4ccccc4n4c(=O)c5ccccc5c(n2)c34)cc1'
         df1 = pd.DataFrame({'Smiles': smiles_input},index=[0])
@@ -101,4 +102,4 @@ if selected_mode == "Single Mode":
                 result = f'Your compound is active with probality of {probs1[0]}%'
             else:
                 result = f'Your compound is inactive with probality of {probs0[0]}%'
-    st.success(result)
+        st.success(result)
