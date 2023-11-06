@@ -67,8 +67,8 @@ if selected_mode == "Single Mode":
         X1 = np.array([x.vec for x in df1['mol2vec']])  
         X = pd.concat((pd.DataFrame(X1), df1.drop(['mol2vec', 'mol', 'sentence', 'Smiles'], axis=1)), axis=1)
         #Application of Domain
-        distances, indices = knn_model.kneighbors(X)
-        Di = np.mean(distances)
+        distances_screen,_ = knn_model.kneighbors(X)
+        Di = np.mean(distances_screen)
         st.success(Di)
         if Di > threshold:
             result = 'Your compound is out of our application domain'
