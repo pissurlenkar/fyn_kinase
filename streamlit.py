@@ -115,14 +115,15 @@ else:
             probs0 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 0] * 100, 2)
             if y_prediction[0] == 1:
                 act = 'Active'
-                activity.append(act)
                 probs = probs1[0]
-                probability.append(probs)
             else:
                 act = 'Inactive'
                 activity.append(act)
                 probability = probs0[0]
-                probability.append(probs)
+
+            probability.append(probs)
+            activity.append(act)
+
         df3 = pd.DataFrame({
             'Compound': data_entries,
             'Predicted Activity': activity,
