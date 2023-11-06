@@ -45,6 +45,7 @@ threshold = Dk + 0.5 * Sk
 Predict_Result1 = ''
 activity = []
 probability = []
+AD = []
 
 def convert_df(df):
     return df.to_csv().encode('utf-8')  
@@ -108,27 +109,40 @@ else:
             X = pd.concat((pd.DataFrame(X1), df1.drop(['mol2vec', 
                                                    'mol',
                                                   'sentence', 'Smiles'], axis=1)), axis=1)
-            # Load pretrained model
-            model = joblib.load('model_fyn.pkl')                 
-            y_prediction = model.predict(X.iloc[[i]].values)
-            probs1 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 1] * 100, 2)
-            probs0 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 0] * 100, 2)
-            if y_prediction[0] == 1:
-                act = 'Active'
-                probs = probs1[0]
+            
+            distances_screen,_ = knn_model.kneighbors(X)
+            Di = np.mean(distances_screen)
+            
+            if Di > threshold:
+                act = 'Not Determine'
+                probs = 'Not Determine'
+                note = 'Outside of Application Domain'
             else:
-                act = 'Inactive'
-                probs = probs0[0]
+                # Load pretrained model
+                model = joblib.load('model_fyn.pkl')                 
+                y_prediction = model.predict(X.iloc[[i]].values)
+                probs1 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 1] * 100, 2)
+                probs0 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 0] * 100, 2)
+                note = ''
+                if y_prediction[0] == 1:
+                    act = 'Active'
+                    probs = probs1[0]
+                else:
+                    act = 'Inactive'
+                    probs = probs0[0]
 
             probability.append(probs)
             activity.append(act)
+            AD.append(note)
 
         df3 = pd.DataFrame({
             'Compound': data_entries,
             'Predicted Activity': activity,
             'Probability (%)': probability,
+            'Note': AD
             })
         st.dataframe(df3)
+        
         st.download_button(
             label="Download results as CSV file",
             data=df3.to_csv(index=False),
