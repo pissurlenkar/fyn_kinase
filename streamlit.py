@@ -43,11 +43,7 @@ selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch 
 
 # Depending on the user's choice, display different content
 if selected_mode == "Single Mode":
-    if st.button('Example'):
-        smiles_input = 'COc1ccc(CNC(=O)c2cc3c4ccccc4n4c(=O)c5ccccc5c(n2)c34)cc1'
-    else:
-        smiles_input = st.text_input("Enter your structure!")
-
+    smiles_input = st.text_input("Enter your structure!")
     if st.button('Result'):
         df1 = pd.DataFrame({'Smiles': smiles_input},index=[0])
         df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
@@ -76,4 +72,33 @@ if selected_mode == "Single Mode":
                 result = f'Your compound is active with probality of {probs1[0]}%'
             else:
                 result = f'Your compound is inactive with probality of {probs0[0]}%'
-        st.success(result)
+    if st.button('Example'):
+        smiles_input = 'COc1ccc(CNC(=O)c2cc3c4ccccc4n4c(=O)c5ccccc5c(n2)c34)cc1'
+        df1 = pd.DataFrame({'Smiles': smiles_input},index=[0])
+        df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
+        df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
+        # Calculate mol2vec descriptors
+        from mol2vec.features import mol2alt_sentence, mol2sentence, MolSentence, DfVec, sentences2vec
+        from gensim.models import word2vec
+        w2vec_model = word2vec.Word2Vec.load('model_300dim.pkl')
+        df1['sentence'] = df1.apply(lambda x: MolSentence(mol2alt_sentence(x['mol'], 1)), axis=1)
+        df1['mol2vec'] = [DfVec(x) for x in sentences2vec(df1['sentence'], w2vec_model, unseen='UNK')]
+        # Create dataframe 
+        X1 = np.array([x.vec for x in df1['mol2vec']])  
+        X = pd.concat((pd.DataFrame(X1), df1.drop(['mol2vec', 'mol', 'sentence', 'Smiles'], axis=1)), axis=1)
+        #Application of Domain
+        distances, indices = knn_model.kneighbors(X)
+        Di = np.mean(distances)
+        if Di > threshold:
+            result = 'Your compound is out of our application domain'
+        else:
+            # Load pretrained model
+            model = joblib.load('model_fyn.pkl')
+            y_prediction = model.predict(X.values)
+            probs1 = np.round(model.predict_proba(X.values)[:, 1] * 100, 2)
+            probs0 = np.round(model.predict_proba(X.values)[:, 0] * 100, 2)
+            if y_prediction[0] == 1:
+                result = f'Your compound is active with probality of {probs1[0]}%'
+            else:
+                result = f'Your compound is inactive with probality of {probs0[0]}%'
+    st.success(result)
