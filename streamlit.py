@@ -21,6 +21,7 @@ from rdkit import Chem
 import random
 import requests
 import io
+import subprocess
 from xgboost import XGBClassifier
 
 # Calculate Application Domain
