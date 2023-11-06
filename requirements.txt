@@ -14,4 +14,4 @@ Pillow == 9.4.0
 tqdm == 4.64.1
 IPython == 7.31.1
 git+https://github.com/samoturk/mol2vec
-xgboost == 1.6.2
+xgboost
