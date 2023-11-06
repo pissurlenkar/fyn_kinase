@@ -114,17 +114,17 @@ else:
             else:
                 result = ('Inactive', f'{probs0[0]}%')
             results1.append(result)
-    for i, (prediction, probability) in enumerate(results1):
-        st.success(f'Kết quả dự đoán cho hàng {i + 1}: {prediction}. Xác suất: {probability}')
-    #Hiển thị dataframe
-    df3 = pd.DataFrame(results1)
-    st.dataframe(df3)
+        for i, (prediction, probability) in enumerate(results1):
+            st.success(f'Kết quả dự đoán cho hàng {i + 1}: {prediction}. Xác suất: {probability}')
+        #Hiển thị dataframe
+        df3 = pd.DataFrame(results1)
+        st.dataframe(df3)
     # Xuất file
     def convert_df(df):
         return df.to_csv().encode('utf-8')  
     csv = convert_df(pd.DataFrame(results1, columns=['Prediction', 'Probability']))
 
-    st.download_button(label="Download results of prediction as CSV",
+    st.download_button(label="Download results as CSV file",
                         data=csv, file_name='Results.csv',
                         mime='text/csv',
                     )
