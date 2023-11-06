@@ -44,8 +44,6 @@ selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch 
 # Depending on the user's choice, display different content
 if selected_mode == "Single Mode":
     smiles_input = st.text_input("Enter your structure!")
-    if st.button('Example'):
-        smiles_input = 'COc1ccc(CNC(=O)c2cc3c4ccccc4n4c(=O)c5ccccc5c(n2)c34)cc1'
     if st.button('Result'):
         df1 = pd.DataFrame({'Smiles': smiles_input},index=[0])
         df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
