@@ -45,7 +45,7 @@ selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch 
 if selected_mode == "Single Mode":
     if st.button('Example'):
         smiles_input = 'COc1ccc(CNC(=O)c2cc3c4ccccc4n4c(=O)c5ccccc5c(n2)c34)cc1'
-     else:
+    else:
         smiles_input = st.text_input("Enter your structure!")
 
     if st.button('Result'):
