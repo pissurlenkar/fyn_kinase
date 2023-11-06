@@ -4,7 +4,7 @@ pickle-mixin
 streamlit == 1.21.0
 streamlit_option_menu == 0.3.2
 scikit-learn == 1.2.0
-joblib == 1.2.0
+joblib
 pubchempy == 1.0.4
 rdkit
 matplotlib == 3.5.2
@@ -14,4 +14,4 @@ Pillow == 9.4.0
 tqdm == 4.64.1
 IPython == 7.31.1
 git+https://github.com/samoturk/mol2vec
-xgboost
+xgboost == 2.0.1
