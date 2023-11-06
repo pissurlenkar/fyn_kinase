@@ -23,6 +23,16 @@ import requests
 import io
 
 df = pd.read_csv('Fyn_kinase.csv')
+y = df['Activity'].values
+X = df.iloc[:, 0:100]
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state = 42)
+from sklearn.neighbors import NearestNeighbors
+k = 5
+knn_model = NearestNeighbors(n_neighbors=k)
+knn_model.fit(X_train)
+threshold = 22.75
+
 Predict_Result1 = ''
 results1 = []
 
@@ -47,13 +57,19 @@ if selected_mode == "Single Mode":
         # Create dataframe 
         X1 = np.array([x.vec for x in df1['mol2vec']])  
         X = pd.concat((pd.DataFrame(X1), df1.drop(['mol2vec', 'mol', 'sentence', 'Smiles'], axis=1)), axis=1)
-    # Load pretrained model
-        model = joblib.load('model_fyn.pkl')
-        y_prediction = model.predict(X.values)
-        probs1 = np.round(model.predict_proba(X.values)[:, 1] * 100, 2)
-        probs0 = np.round(model.predict_proba(X.values)[:, 0] * 100, 2)
-        if y_prediction[0] == 1:
-            result = f'Your compound is active with probality of {probs1[0]}%'
+        #Application of Domain
+        distances, indices = knn_model.kneighbors(X)
+        Di = np.mean(distances)
+        if Di > threshold:
+            result = 'Your compound is out of our application domain'
         else:
-            result = f'Your compound is inactive with probality of {probs0[0]}%'
+            # Load pretrained model
+            model = joblib.load('model_fyn.pkl')
+            y_prediction = model.predict(X.values)
+            probs1 = np.round(model.predict_proba(X.values)[:, 1] * 100, 2)
+            probs0 = np.round(model.predict_proba(X.values)[:, 0] * 100, 2)
+            if y_prediction[0] == 1:
+                result = f'Your compound is active with probality of {probs1[0]}%'
+            else:
+                result = f'Your compound is inactive with probality of {probs0[0]}%'
         st.success(result)
