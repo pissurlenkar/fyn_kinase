@@ -91,6 +91,7 @@ else:
     if smiles_input:
         entries = smiles_input.split('\n')        
         data_entries.extend(entries)
+        st.success(data_entries)
     if st.button('Result'):
         df1 = pd.DataFrame({'Smiles': data_entries},index=[0])
         for i in range(len(df1)):
@@ -102,7 +103,7 @@ else:
             df1['sentence'] = df1.apply(lambda x: MolSentence(mol2alt_sentence(x['mol'], 1)), axis=1)
             df1['mol2vec'] = [DfVec(x) for x in sentences2vec(df1['sentence'], w2vec_model, unseen='UNK')]
         
-        # Creat11dataframe 
+        # Creat dataframe 
             X1 = np.array([x.vec for x in df1['mol2vec']])  
             X = pd.concat((pd.DataFrame(X1), df1.drop(['mol2vec', 
                                                    'mol',
