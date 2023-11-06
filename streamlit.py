@@ -114,12 +114,12 @@ else:
             probs1 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 1] * 100, 2)
             probs0 = np.round(model.predict_proba(X.iloc[[i]].values)[:, 0] * 100, 2)
             if y_prediction[0] == 1:
-                act = 'Active'
+                act = ('Active')
                 activity.append(act)
                 probs = probs1[0]
                 probability.append(probs)
             else:
-                activity = 'Inactive'
+                activity = ('Inactive')
                 activity.append(act)
                 probability = probs0[0]
                 probability.append(probs)
