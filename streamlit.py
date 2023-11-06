@@ -118,7 +118,7 @@ else:
                 result = ('Inactive', f'{probs0[0]}%')
             results1.append(result)
         for i, (prediction, probability) in enumerate(results1):
-            st.success(f'Kết quả dự đoán cho hàng {i + 1}: {prediction}. Xác suất: {probability}')
+            st.success(f'Compound {i + 1} is {prediction} with probality of {probability}')
         #Hiển thị dataframe
         df3 = pd.DataFrame(results1)
         st.dataframe(df3)
