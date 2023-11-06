@@ -22,7 +22,6 @@ import random
 import requests
 import io
 from xgboost import XGBClassifier
-from sklearn.model_selection import GridSearchCV
 
 df = pd.read_csv('Fyn_kinase.csv')
 y = df['Activity'].values
