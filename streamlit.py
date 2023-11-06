@@ -116,12 +116,12 @@ else:
             if y_prediction[0] == 1:
                 act = 'Active'
                 activity.append(act)
-                probs = probs1[0].tolist()
+                probs = probs1[0]
                 probability.append(probs)
             else:
                 act = 'Inactive'
                 activity.append(act)
-                probability = probs0[0].tolist()
+                probability = probs0[0]
                 probability.append(probs)
         df3 = pd.DataFrame({
             'Compound': data_entries,
