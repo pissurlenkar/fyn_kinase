@@ -32,7 +32,11 @@ from sklearn.neighbors import NearestNeighbors
 k = 5
 knn_model = NearestNeighbors(n_neighbors=k)
 knn_model.fit(X_train)
-threshold = 22.75
+distances, indices = knn_model.kneighbors(X_train)
+Dk = np.mean(distances)
+Sk = np.std(distances)
+threshold = Dk + 0.5 * Sk
+
 
 Predict_Result1 = ''
 results1 = []
@@ -62,6 +66,7 @@ if selected_mode == "Single Mode":
         distances, indices = knn_model.kneighbors(X)
         Di = np.mean(distances[0])
         st.success(Di)
+        st.success(threshold)
         if Di > threshold:
             result = 'Your compound is out of our application domain'
         else:
