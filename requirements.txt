@@ -1,18 +1,18 @@
 numpy
-pandas == 1.3.5
+pandas==1.3.5
 pickle-mixin
-streamlit == 1.21.0
-streamlit_option_menu == 0.3.2
-scikit-learn == 1.2.0
-joblib == 1.3.2
-pubchempy == 1.0.4
+streamlit==1.21.0
+streamlit_option_menu==0.3.2
+scikit-learn==1.2.0
+joblib==1.3.2
+pubchempy==1.0.4
 rdkit
 matplotlib == 3.5.2
 seaborn == 0.11.2
-gensim==3.8.0
-Pillow == 9.4.0
-tqdm == 4.64.1
-IPython == 7.31.1
+gensim==4.3.2
+Pillow==9.4.0
+tqdm==4.64.1
+IPython==7.31.1
 git+https://github.com/samoturk/mol2vec
-xgboost == 2.0.1
+xgboost==2.0.1
 imblearn
