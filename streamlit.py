@@ -24,7 +24,7 @@ import io
 import subprocess
 from xgboost import XGBClassifier
 
-features_path = os.path.abspath("model_300dim.pkl")
+features_path = os.path.abspath("features.py")
 #wget https://raw.githubusercontent.com/tonyreina/mol2vec/master/mol2vec/features.py -O /mount/src/fyn_kinase/features.py
 
 # Calculate Application Domain
