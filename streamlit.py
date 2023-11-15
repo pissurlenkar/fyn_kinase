@@ -24,8 +24,6 @@ import io
 import subprocess
 from xgboost import XGBClassifier
 
-wget https://raw.githubusercontent.com/tonyreina/mol2vec/master/mol2vec/features.py -O /mount/src/fyn_kinase/features.py
-
 # Calculate Application Domain
 df = pd.read_csv('Fyn_kinase.csv')
 y = df['Activity'].values
