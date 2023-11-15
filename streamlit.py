@@ -9,7 +9,7 @@ import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
 import joblib
-import pubchempy as pcp
+import os
 import numpy as np                
 import pandas as pd               
 import matplotlib.pyplot as plt   
@@ -24,6 +24,8 @@ import io
 import subprocess
 from xgboost import XGBClassifier
 
+features_path = os.path.join(os.path.dirname(__file__), "features.py")
+wget https://raw.githubusercontent.com/tonyreina/mol2vec/master/mol2vec/features.py -O features_path
 
 # Calculate Application Domain
 df = pd.read_csv('Fyn_kinase.csv')
