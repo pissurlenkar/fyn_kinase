@@ -24,8 +24,7 @@ import io
 import subprocess
 from xgboost import XGBClassifier
 
-features_path = os.path.abspath("features.py")
-#wget https://raw.githubusercontent.com/tonyreina/mol2vec/master/mol2vec/features.py -O /mount/src/fyn_kinase/features.py
+wget https://raw.githubusercontent.com/tonyreina/mol2vec/master/mol2vec/features.py -O /mount/src/fyn_kinase/features.py
 
 # Calculate Application Domain
 df = pd.read_csv('Fyn_kinase.csv')
@@ -63,7 +62,6 @@ selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch 
 if selected_mode == "Single Mode":
     smiles_input = st.text_input("Enter your structure!")
     if st.button('Result'):
-        st.success(features_path)
         df1 = pd.DataFrame({'Smiles': smiles_input},index=[0])
         df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
         df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
