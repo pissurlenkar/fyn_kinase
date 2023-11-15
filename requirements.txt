@@ -13,6 +13,6 @@ gensim==4.3.2
 Pillow==9.4.0
 tqdm==4.64.1
 IPython==7.31.1
-git+https://github.com/samoturk/mol2vec
+git+https://github.com/phuongnvp/mol2vec
 xgboost==2.0.1
 imblearn
