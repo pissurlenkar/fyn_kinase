@@ -25,6 +25,7 @@ import subprocess
 from xgboost import XGBClassifier
 from PIL import Image
 import meeko
+from meeko import MoleculePreparation
 
 # Calculate Application Domain
 df = pd.read_csv('Fyn_kinase.csv')
@@ -173,7 +174,8 @@ elif selected_mode == "Molecular docking":
             rdkit.Chem.AllChem.EmbedMolecule(protonated_lig)
             meeko_prep = meeko.MoleculePreparation()
             meeko_prep.prepare(protonated_lig)
-            lig_pdbqt = meeko_prep.write_pdbqt_string()
+            meeko_prep.write_pdbqt_file("lig.pdbqt")
+            #lig_pdbqt = meeko_prep.write_pdbqt_string()
             #v = Vina(sf_name='vina')
             #v.set_receptor('protein.pdbqt')
             #v.set_ligand_from_string(lig_pdbqt)
