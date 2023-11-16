@@ -54,6 +54,10 @@ AD = []
 def convert_df(df):
     return df.to_csv().encode('utf-8')  
 
+def read_pdbqt_file(file):
+    content = file.read()
+    return content
+
 #st.title('FYN KINASE SCREENING')
 st.markdown("<h1 style='text-align: center;'>FYN KINASE SCREENING</h1>", unsafe_allow_html=True)
 
@@ -176,8 +180,5 @@ elif selected_mode == "Molecular docking":
             meeko_prep.prepare(protonated_lig)
             meeko_prep.write_pdbqt_file("lig.pdbqt")
 
-            with open("lig.pdbqt", 'r') as pdbqt_file:
-                pdbqt_contents = pdbqt_file.read()
-
-            # Now you can work with the contents of the PDBQT file as a text string
-           st.success(pdbqt_contents)
+            pdbqt_contents = read_pdbqt_file("lig.pdbqt")
+            st.code(pdbqt_contents, language='text')
