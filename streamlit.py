@@ -175,13 +175,9 @@ elif selected_mode == "Molecular docking":
             meeko_prep = meeko.MoleculePreparation()
             meeko_prep.prepare(protonated_lig)
             meeko_prep.write_pdbqt_file("lig.pdbqt")
-            #lig_pdbqt = meeko_prep.write_pdbqt_string()
-            #v = Vina(sf_name='vina')
-            #v.set_receptor('protein.pdbqt')
-            #v.set_ligand_from_string(lig_pdbqt)
-            #v.compute_vina_maps(center=[-16.501, 18.133, -13.458], box_size=[22.5, 22.5, 22.5])
-            #energy = v.score()
-            #energy_minimized = v.optimize()
-            #v.write_pose('lig_minimized.pdbqt', overwrite=True)
-            #v.dock(exhaustiveness=8, n_poses=10)
-            #v.write_poses('ligand_out.pdbqt', n_poses=10, overwrite=True)
+
+            with open("lig.pdbqt", 'r') as pdbqt_file:
+                pdbqt_contents = pdbqt_file.read()
+
+            # Now you can work with the contents of the PDBQT file as a text string
+           st.write(pdbqt_contents)
