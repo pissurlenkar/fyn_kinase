@@ -180,4 +180,4 @@ elif selected_mode == "Molecular docking":
                 pdbqt_contents = pdbqt_file.read()
 
             # Now you can work with the contents of the PDBQT file as a text string
-           st.write(pdbqt_contents)
+           st.success(pdbqt_contents)
