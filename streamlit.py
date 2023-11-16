@@ -55,7 +55,6 @@ def convert_df(df):
 #st.title('FYN KINASE SCREENING')
 st.markdown("<h1 style='text-align: center;'>FYN KINASE SCREENING</h1>", unsafe_allow_html=True)
 
-st.title("Mode of Screening")
 selected_mode = st.sidebar.selectbox("Select Mode", ["QSAR", "Molecular docking"])
 
 if selected_mode == "QSAR":
