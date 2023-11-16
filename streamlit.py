@@ -55,6 +55,9 @@ def convert_df(df):
 #st.title('FYN KINASE SCREENING')
 st.markdown("<h1 style='text-align: center;'>FYN KINASE SCREENING</h1>", unsafe_allow_html=True)
 
+st.title("Mode Selector")
+selected_mode = st.sidebar.selectbox("Select Mode", ["QSAR", "Docking"])
+
 # Create a radio button to choose the mode
 selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch Mode"])
 
