@@ -24,6 +24,7 @@ import io
 import subprocess
 from xgboost import XGBClassifier
 from PIL import Image
+import pybel
 
 # Calculate Application Domain
 df = pd.read_csv('Fyn_kinase.csv')
