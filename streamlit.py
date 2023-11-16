@@ -152,7 +152,7 @@ else:
             'Probability (%)': probability,
             'Note': AD
             })
-        df3['Structure'] = df1['Structure'].apply(lambda x: f'<img src="data:image/png;base64,{Image.fromarray(x).tobytes().decode("base64")}" alt="structure" width="300">')
+        df3['Structure'] = df1['Structure'].apply(lambda x: f'<img src="data:image/png;base64,{Image.fromarray(x).convert("RGB").tobytes().encode("base64").decode()}" alt="structure" width="300">')
         st.dataframe(df3, escape_html=False, unsafe_allow_html=True)
         
         st.download_button(
