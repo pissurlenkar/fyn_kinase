@@ -152,6 +152,9 @@ else:
             'Note': AD
             })
         st.dataframe(df3)
+
+        for i, row in df3.iterrows():
+            st.image(row['Structure'], caption=f"Compound {i}", use_column_width=True)
         
         st.download_button(
             label="Download results as CSV file",
