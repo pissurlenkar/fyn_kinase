@@ -97,14 +97,21 @@ else:
         data_entries.extend(entries)
     if st.button('Result'):
         df1 = pd.DataFrame({'Smiles': data_entries})
+        structure_images = []
         for i in range(len(df1)):
             df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
             df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
+
+            # Generate structure image from RDKit
+            img = Chem.MolToImage(df1['mol'].iloc[i], size=(300, 300))
+            structure_images.append(img)
+            
             from mol2vec.features import mol2alt_sentence, mol2sentence, MolSentence, DfVec, sentences2vec
             from gensim.models import word2vec
             w2vec_model = word2vec.Word2Vec.load('model_300dim.pkl')
             df1['sentence'] = df1.apply(lambda x: MolSentence(mol2alt_sentence(x['mol'], 1)), axis=1)
             df1['mol2vec'] = [DfVec(x) for x in sentences2vec(df1['sentence'], w2vec_model, unseen='UNK')]
+            df1['Structure'] = structure_images
         
         # Creat dataframe 
             X1 = np.array([x.vec for x in df1['mol2vec']])  
@@ -140,6 +147,7 @@ else:
 
         df3 = pd.DataFrame({
             'Compound': data_entries,
+            'Structure': structure_images,
             'Predicted Activity': activity,
             'Probability (%)': probability,
             'Note': AD
