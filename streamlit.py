@@ -103,13 +103,6 @@ else:
         for i in range(len(df1)):
             df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
             df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
-
-            # Generate structure image from RDKit
-            img = Draw.MolToImage(df1['mol'].iloc[i], size=(300, 300))
-            structure_images.append(img)
-            img_bytes = io.BytesIO()
-            img.save(img_bytes, format='PNG')
-            img_bytes_list.append(img_bytes.getvalue())
             
             from mol2vec.features import mol2alt_sentence, mol2sentence, MolSentence, DfVec, sentences2vec
             from gensim.models import word2vec
@@ -152,12 +145,11 @@ else:
 
         df3 = pd.DataFrame({
             'Compound': data_entries,
-            'Structure': img_bytes_list,
             'Predicted Activity': activity,
             'Probability (%)': probability,
             'Note': AD
             })
-        st.dataframe(df3.style.format({'Structure': lambda x: f'<img src="data:image/png;base64,{x}" alt="image" width="300">'}, escape=False, unsafe_allow_html=True))
+        st.dataframe(df3)
         
         st.download_button(
             label="Download results as CSV file",
