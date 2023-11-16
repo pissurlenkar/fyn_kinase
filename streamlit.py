@@ -24,8 +24,7 @@ import io
 import subprocess
 from xgboost import XGBClassifier
 from PIL import Image
-#from vina import Vina
-#import meeko
+from dockstring import load_target
 
 
 # Calculate Application Domain
