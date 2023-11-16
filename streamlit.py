@@ -163,3 +163,4 @@ if selected_mode == "QSAR":
                 )
 
 if selected_mode == "Molecular docking":
+    st.write('Keep calm!')
