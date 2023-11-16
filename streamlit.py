@@ -89,7 +89,7 @@ if selected_mode == "Single Mode":
                 result = f'Your compound is inactive with probality of {probs0[0]}%'
         st.success(result)
 else:
-    smiles_input = st.text_area('Enter your structures!')
+    smiles_input = st.text_area('Enter your structures! (One SMILES per line)')
     data_entries = []
     if smiles_input:
         entries = smiles_input.split('\n')        
