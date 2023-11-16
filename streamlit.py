@@ -99,7 +99,7 @@ else:
     if st.button('Result'):
         df1 = pd.DataFrame({'Smiles': data_entries})
         structure_images = []
-        image_bytes_list = []
+        img_bytes_list = []
         for i in range(len(df1)):
             df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
             df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
