@@ -111,7 +111,6 @@ else:
             w2vec_model = word2vec.Word2Vec.load('model_300dim.pkl')
             df1['sentence'] = df1.apply(lambda x: MolSentence(mol2alt_sentence(x['mol'], 1)), axis=1)
             df1['mol2vec'] = [DfVec(x) for x in sentences2vec(df1['sentence'], w2vec_model, unseen='UNK')]
-            df1['Structure'] = structure_images
         
         # Creat dataframe 
             X1 = np.array([x.vec for x in df1['mol2vec']])  
