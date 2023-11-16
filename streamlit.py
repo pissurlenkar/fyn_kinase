@@ -181,5 +181,6 @@ elif selected_mode == "Molecular docking":
             meeko_prep.prepare(protonated_lig)
             meeko_prep.write_pdbqt_file("lig.pdbqt")
 
-            pdbqt_contents = read_pdbqt_file("lig.pdbqt")
+            with open("lig.pdbqt", 'r') as file:
+                pdbqt_contents = read_pdbqt_file(file)
             st.code(pdbqt_contents, language='text')
