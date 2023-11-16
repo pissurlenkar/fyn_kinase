@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd               
 import matplotlib.pyplot as plt   
 import seaborn as sns
+import rdkit
 from rdkit.Chem import Draw, Descriptors, rdqueries
 from rdkit import RDLogger  
 RDLogger.DisableLog('rdApp.*')  
