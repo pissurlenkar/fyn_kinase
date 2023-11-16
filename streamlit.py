@@ -51,7 +51,8 @@ AD = []
 def convert_df(df):
     return df.to_csv().encode('utf-8')  
 
-st.title('FYN KINASE SCREENING')
+#st.title('FYN KINASE SCREENING')
+st.markdown("<h1 style='text-align: center;'>FYN KINASE SCREENING</h1>", unsafe_allow_html=True)
 
 # Create a radio button to choose the mode
 selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch Mode"])
