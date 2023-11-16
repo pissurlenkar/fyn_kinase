@@ -103,7 +103,7 @@ else:
             df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
 
             # Generate structure image from RDKit
-            img = Chem.MolToImage(df1['mol'].iloc[i], size=(300, 300))
+            img = Draw.MolToImage(df1['mol'].iloc[i], size=(300, 300))
             structure_images.append(img)
             
             from mol2vec.features import mol2alt_sentence, mol2sentence, MolSentence, DfVec, sentences2vec
