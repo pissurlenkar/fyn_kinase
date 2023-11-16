@@ -161,5 +161,10 @@ if selected_mode == "QSAR":
                 mime='text/csv'
                 )
 
-if selected_mode == "Molecular docking":
-    st.write('Keep calm!')
+elif selected_mode == "Molecular docking":
+    selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch Mode"])
+    if selected_mode == "Single Mode":
+        smiles_input = st.text_input("Enter your SMILES string!")
+        if st.button('Result'):
+            st.write('Keep calm!')
+    
