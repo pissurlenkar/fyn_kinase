@@ -107,6 +107,9 @@ else:
             # Generate structure image from RDKit
             img = Draw.MolToImage(df1['mol'].iloc[i], size=(300, 300))
             structure_images.append(img)
+            img_bytes = io.BytesIO()
+            img.save(img_bytes, format='PNG')
+            img_bytes_list.append(img_bytes.getvalue())
             
             from mol2vec.features import mol2alt_sentence, mol2sentence, MolSentence, DfVec, sentences2vec
             from gensim.models import word2vec
@@ -145,15 +148,16 @@ else:
             probability.append(probs)
             activity.append(act)
             AD.append(note)
-        
+            
+
         df3 = pd.DataFrame({
             'Compound': data_entries,
-            'Structure': structure_images,
+            'Structure': img_bytes_list,
             'Predicted Activity': activity,
             'Probability (%)': probability,
             'Note': AD
             })
-        st.dataframe(df3)
+        st.dataframe(df3.style.format({'Structure': lambda x: f'<img src="data:image/png;base64,{x}" alt="image" width="300">'}, escape=False), unsafe_allow_html=True)
         
         st.download_button(
             label="Download results as CSV file",
