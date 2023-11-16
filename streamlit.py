@@ -148,7 +148,7 @@ else:
         
         df3 = pd.DataFrame({
             'Compound': data_entries,
-            'Structure': st.image(structure_images),
+            'Structure': structure_images,
             'Predicted Activity': activity,
             'Probability (%)': probability,
             'Note': AD
