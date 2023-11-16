@@ -182,3 +182,5 @@ elif selected_mode == "Molecular docking":
             energy = v.score()
             energy_minimized = v.optimize()
             v.write_pose('lig_minimized.pdbqt', overwrite=True)
+            v.dock(exhaustiveness=8, n_poses=10)
+            v.write_poses('ligand_out.pdbqt', n_poses=10, overwrite=True)
