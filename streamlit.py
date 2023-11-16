@@ -24,8 +24,9 @@ import io
 import subprocess
 from xgboost import XGBClassifier
 from PIL import Image
-import meeko
 from vina import Vina
+import meeko
+
 
 # Calculate Application Domain
 df = pd.read_csv('Fyn_kinase.csv')
