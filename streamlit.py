@@ -185,3 +185,10 @@ elif selected_mode == "Molecular docking":
             with open("lig.pdbqt", 'r') as file:
                 pdbqt_contents = read_pdbqt_file(file)
             st.code(pdbqt_contents, language='text')
+            try:
+                result = subprocess.run(["wine", "run_vina.bat"], capture_output=True, text=True)
+                st.text("Execution Result:")
+                st.text(result.stdout)
+                st.text(result.stderr)
+            except Exception as e:
+                st.error(f"Error executing Autodock vina: {e}")
