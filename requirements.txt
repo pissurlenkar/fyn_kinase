@@ -17,4 +17,3 @@ git+https://github.com/phuongnvp/mol2vec
 xgboost==2.0.1
 imblearn
 openbabel=3.1.1
-git+https://github.com/dockstring/dockstring
