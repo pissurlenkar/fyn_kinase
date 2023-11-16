@@ -147,13 +147,12 @@ else:
         df1['Structure'] = structure_images
         df3 = pd.DataFrame({
             'Compound': data_entries,
-            #'Structure': structure_images,
+            'Structure': structure_images,
             'Predicted Activity': activity,
             'Probability (%)': probability,
             'Note': AD
             })
-        df3['Structure'] = df1['Structure'].apply(lambda x: f'<img src="data:image/png;base64,{Image.fromarray(x).convert("RGB").tobytes().encode("base64").decode()}" alt="structure" width="300">')
-        st.dataframe(df3, escape_html=False, unsafe_allow_html=True)
+        st.dataframe(df3)
         
         st.download_button(
             label="Download results as CSV file",
