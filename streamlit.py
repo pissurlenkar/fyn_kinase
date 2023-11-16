@@ -153,7 +153,7 @@ else:
             'Probability (%)': probability,
             'Note': AD
             })
-        st.dataframe(df3.to_html(escape=False), unsafe_allow_html=True)
+        st.dataframe(df3)
         
         st.download_button(
             label="Download results as CSV file",
