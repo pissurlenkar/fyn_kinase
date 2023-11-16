@@ -24,6 +24,8 @@ import io
 import subprocess
 from xgboost import XGBClassifier
 from PIL import Image
+import meeko
+from vina import Vina
 
 # Calculate Application Domain
 df = pd.read_csv('Fyn_kinase.csv')
@@ -167,4 +169,16 @@ elif selected_mode == "Molecular docking":
         smiles_input = st.text_input("Enter your SMILES string!")
         if st.button('Result'):
             st.write('Keep calm!')
-    
+            lig = Chem.MolFromSmiles(smiles_input)
+            protonated_lig = Chem.AddHs(lig)
+            rdkit.Chem.AllChem.EmbedMolecule(protonated_lig)
+            meeko_prep = meeko.MoleculePreparation()
+            meeko_prep.prepare(protonated_lig)
+            lig_pdbqt = meeko_prep.write_pdbqt_string()
+            v = Vina(sf_name='vina')
+            v.set_receptor('protein.pdbqt')
+            v.set_ligand_from_string(lig_pdbqt)
+            v.compute_vina_maps(center=[-16.501, 18.133, -13.458], box_size=[22.5, 22.5, 22.5])
+            energy = v.score()
+            energy_minimized = v.optimize()
+            v.write_pose('lig_minimized.pdbqt', overwrite=True)
