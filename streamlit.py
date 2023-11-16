@@ -157,7 +157,7 @@ else:
             'Probability (%)': probability,
             'Note': AD
             })
-        st.dataframe(df3.style.format({'Structure': lambda x: f'<img src="data:image/png;base64,{x}" alt="image" width="300">'}, escape=False), unsafe_allow_html=True)
+        st.dataframe(df3.style.format({'Structure': lambda x: f'<img src="data:image/png;base64,{x}" alt="image" width="300">'}, escape=False, unsafe_allow_html=True))
         
         st.download_button(
             label="Download results as CSV file",
