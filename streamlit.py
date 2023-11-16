@@ -143,7 +143,7 @@ else:
             probability.append(probs)
             activity.append(act)
             AD.append(note)
-
+        df1['Structure'] = structure_images
         df3 = pd.DataFrame({
             'Compound': data_entries,
             'Structure': structure_images,
@@ -152,9 +152,6 @@ else:
             'Note': AD
             })
         st.dataframe(df3)
-
-        for i, row in df3.iterrows():
-            st.image(row['Structure'], caption=f"Compound {i}", use_column_width=True)
         
         st.download_button(
             label="Download results as CSV file",
