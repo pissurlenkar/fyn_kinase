@@ -67,7 +67,8 @@ def extract_affinity(log_contents):
     if match:
         affinity = float(match.group(1))
         return affinity
-    return None
+    else:
+        return None
     
 #st.title('FYN KINASE SCREENING')
 st.markdown("<h1 style='text-align: center;'>FYN KINASE SCREENING</h1>", unsafe_allow_html=True)
