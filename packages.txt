@@ -4,3 +4,4 @@ libgl1-mesa-glx
 tesseract-ocr
 libtesseract-dev
 tesseract-ocr-all
+autodock-vina
