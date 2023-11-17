@@ -178,31 +178,34 @@ elif selected_mode == "Molecular docking":
         if st.button('Result'):
             #st.write('Keep calm!')
             lig = Chem.MolFromSmiles(smiles_input)
-            protonated_lig = Chem.AddHs(lig)
-            rdkit.Chem.AllChem.EmbedMolecule(protonated_lig)
-            meeko_prep = meeko.MoleculePreparation()
-            meeko_prep.prepare(protonated_lig)
-            meeko_prep.write_pdbqt_file("ligand_1.pdbqt")
-
-            #with open("ligand_1.pdbqt", 'r') as file:
-            #    pdbqt_contents = read_file(file)
-            #st.code(pdbqt_contents, language='text')
-
-            process = subprocess.Popen(['bash', 'run_vina.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-            # Wait for the process to finish
-            #stdout, stderr = process.communicate()
-
-            # Print the output
-            with open("ligand_1/log.txt", 'r') as file:
-                log_contents = read_file(file)
-            st.code(log_contents, language='text')
-
-            current_dir = os.getcwd()
-            file_path = f"{current_dir}/ligand_1/out.pdbqt"
-            st.download_button(
-                label="Download output pdbqt file",
-                data=open(file_path, 'rb').read(),
-                file_name='ligand_out.pdbqt',
-                key="download_button"
-            )
+            if lig is None:
+                st.success("Your SMILES is invalid! Please check again!)
+            else:
+                protonated_lig = Chem.AddHs(lig)
+                rdkit.Chem.AllChem.EmbedMolecule(protonated_lig)
+                meeko_prep = meeko.MoleculePreparation()
+                meeko_prep.prepare(protonated_lig)
+                meeko_prep.write_pdbqt_file("ligand_1.pdbqt")
+    
+                #with open("ligand_1.pdbqt", 'r') as file:
+                #    pdbqt_contents = read_file(file)
+                #st.code(pdbqt_contents, language='text')
+    
+                process = subprocess.Popen(['bash', 'run_vina.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
+                # Wait for the process to finish
+                #stdout, stderr = process.communicate()
+    
+                # Print the output
+                with open("ligand_1/log.txt", 'r') as file:
+                    log_contents = read_file(file)
+                st.code(log_contents, language='text')
+    
+                current_dir = os.getcwd()
+                file_path = f"{current_dir}/ligand_1/out.pdbqt"
+                st.download_button(
+                    label="Download output pdbqt file",
+                    data=open(file_path, 'rb').read(),
+                    file_name='ligand_out.pdbqt',
+                    key="download_button"
+                )
