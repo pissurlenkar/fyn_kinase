@@ -203,5 +203,6 @@ elif selected_mode == "Molecular docking":
             st.download_button(
                 label="Download output pdbqt file",
                 data=open(file_path, 'rb').read(),
+                file_name='ligand_out.pdbqt',
                 key="download_button"
             )
