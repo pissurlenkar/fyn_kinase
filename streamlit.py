@@ -176,7 +176,7 @@ elif selected_mode == "Molecular docking":
     if selected_mode == "Single Mode":
         smiles_input = st.text_input("Enter your SMILES string!")
         if st.button('Result'):
-            st.write('Keep calm!')
+            #st.write('Keep calm!')
             lig = Chem.MolFromSmiles(smiles_input)
             protonated_lig = Chem.AddHs(lig)
             rdkit.Chem.AllChem.EmbedMolecule(protonated_lig)
@@ -184,17 +184,16 @@ elif selected_mode == "Molecular docking":
             meeko_prep.prepare(protonated_lig)
             meeko_prep.write_pdbqt_file("ligand_1.pdbqt")
 
-            with open("ligand_1.pdbqt", 'r') as file:
-                pdbqt_contents = read_file(file)
-            st.code(pdbqt_contents, language='text')
+            #with open("ligand_1.pdbqt", 'r') as file:
+            #    pdbqt_contents = read_file(file)
+            #st.code(pdbqt_contents, language='text')
 
             process = subprocess.Popen(['bash', 'run_vina.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
             # Wait for the process to finish
-            stdout, stderr = process.communicate()
+            #stdout, stderr = process.communicate()
 
             # Print the output
-            
             with open("ligand_1/log.txt", 'r') as file:
                 log_contents = read_file(file)
             st.code(log_contents, language='text')
