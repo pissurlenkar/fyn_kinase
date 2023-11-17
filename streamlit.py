@@ -199,5 +199,9 @@ elif selected_mode == "Molecular docking":
             st.code(log_contents, language='text')
 
             current_dir = os.getcwd()
-            download_link = f"{current_dir}/ligand_1/out.pdbqt"
-            st.markdown(f"[Click here to download output file]({download_link})")
+            file_path = f"{current_dir}/ligand_1/out.pdbqt"
+            st.download_button(
+                label="Download output pdbqt file",
+                data=open(file_path, 'rb').read(),
+                key="download_button"
+            )
