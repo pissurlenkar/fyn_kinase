@@ -60,6 +60,14 @@ def read_file(file):
     content = file.read()
     return content
 
+def extract_affinity(log_contents):
+    # Use regular expressions to find the affinity in the log contents
+    match = re.search(r"mode 1\s+([-+]?\d*\.\d+|\d+)", log_contents)
+    if match:
+        affinity = float(match.group(1))
+        return affinity
+    return None
+    
 #st.title('FYN KINASE SCREENING')
 st.markdown("<h1 style='text-align: center;'>FYN KINASE SCREENING</h1>", unsafe_allow_html=True)
 
@@ -209,3 +217,7 @@ elif selected_mode == "Molecular docking":
                     file_name='ligand_out.pdbqt',
                     key="download_button"
                 )
+
+                affinity_mode_1 = extract_affinity(log_contents)
+                if affinity_mode_1 is not None:
+                    st.success(f"Affinity of mode 1: {affinity_mode_1} kcal/mol")
