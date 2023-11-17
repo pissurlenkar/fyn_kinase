@@ -177,6 +177,10 @@ elif selected_mode == "Molecular docking":
         smiles_input = st.text_input("Enter your SMILES string!")
         if st.button('Result'):
             #st.write('Keep calm!')
+            if delete_files:
+                os.remove("ligand_1/out.pdbqt")
+                os.remove("ligand_1/log.txt")
+                delete_files = False
             lig = Chem.MolFromSmiles(smiles_input)
             protonated_lig = Chem.AddHs(lig)
             rdkit.Chem.AllChem.EmbedMolecule(protonated_lig)
@@ -206,3 +210,6 @@ elif selected_mode == "Molecular docking":
                 file_name='ligand_out.pdbqt',
                 key="download_button"
             )
+
+            delete_files = True
+            
