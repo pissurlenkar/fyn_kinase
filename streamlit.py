@@ -27,7 +27,6 @@ from xgboost import XGBClassifier
 from PIL import Image
 import meeko
 from meeko import MoleculePreparation
-import vina
 
 # Calculate Application Domain
 df = pd.read_csv('Fyn_kinase.csv')
