@@ -219,6 +219,7 @@ elif selected_mode == "Molecular docking":
         if st.button('Result'):
             df1 = pd.DataFrame({'Smiles': data_entries})
             for i in range(len(df1)):
+                lig = Chem.MolFromSmiles(df1['Smiles'])
                 protonated_lig = Chem.AddHs(lig)
                 rdkit.Chem.AllChem.EmbedMolecule(protonated_lig)
                 meeko_prep = meeko.MoleculePreparation()
