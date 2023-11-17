@@ -187,3 +187,12 @@ elif selected_mode == "Molecular docking":
             with open("lig.pdbqt", 'r') as file:
                 pdbqt_contents = read_pdbqt_file(file)
             st.code(pdbqt_contents, language='text')
+
+            process = subprocess.Popen(['bash', 'run_vina.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+            # Wait for the process to finish
+            stdout, stderr = process.communicate()
+
+            # Print the output
+            st.success("Standard Output:\n", stdout.decode())
+            st.success("Standard Error:\n", stderr.decode())
