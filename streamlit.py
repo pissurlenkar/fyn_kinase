@@ -194,5 +194,4 @@ elif selected_mode == "Molecular docking":
             stdout, stderr = process.communicate()
 
             # Print the output
-            st.success(f"Standard Output: {stdout.decode()}")
-            st.success(f"Standard Error: {stderr.decode()}")
+            st.write(f"Standard Output: {stdout.decode()}")
