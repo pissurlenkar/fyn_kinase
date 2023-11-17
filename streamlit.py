@@ -218,4 +218,22 @@ elif selected_mode == "Molecular docking":
             data_entries.extend(entries)
         if st.button('Result'):
             df1 = pd.DataFrame({'Smiles': data_entries})
-        
+            for i in range(len(df1)):
+                protonated_lig = Chem.AddHs(lig)
+                rdkit.Chem.AllChem.EmbedMolecule(protonated_lig)
+                meeko_prep = meeko.MoleculePreparation()
+                meeko_prep.prepare(protonated_lig)
+                meeko_prep.write_pdbqt_file(f"ligand_{i+1}.pdbqt")
+                process = subprocess.Popen(['bash', 'run_vina.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                with open(f"ligand_{i+1}/log.txt", 'r') as file:
+                    log_contents = read_file(file)
+                st.code(log_contents, language='text')
+    
+                current_dir = os.getcwd()
+                file_path = f"{current_dir}/ligand_{i+1}/out.pdbqt"
+                st.download_button(
+                    label="Download output pdbqt file",
+                    data=open(file_path, 'rb').read(),
+                    file_name=f'ligand_{i+1}_out.pdbqt',
+                    key="download_button"
+                )
