@@ -182,9 +182,9 @@ elif selected_mode == "Molecular docking":
             rdkit.Chem.AllChem.EmbedMolecule(protonated_lig)
             meeko_prep = meeko.MoleculePreparation()
             meeko_prep.prepare(protonated_lig)
-            meeko_prep.write_pdbqt_file("lig.pdbqt")
+            meeko_prep.write_pdbqt_file("ligand_1.pdbqt")
 
-            with open("lig.pdbqt", 'r') as file:
+            with open("ligand_1.pdbqt", 'r') as file:
                 pdbqt_contents = read_pdbqt_file(file)
             st.code(pdbqt_contents, language='text')
 
