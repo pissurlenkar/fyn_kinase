@@ -56,7 +56,7 @@ AD = []
 def convert_df(df):
     return df.to_csv().encode('utf-8')  
 
-def read_pdbqt_file(file):
+def read_file(file):
     content = file.read()
     return content
 
@@ -185,7 +185,7 @@ elif selected_mode == "Molecular docking":
             meeko_prep.write_pdbqt_file("ligand_1.pdbqt")
 
             with open("ligand_1.pdbqt", 'r') as file:
-                pdbqt_contents = read_pdbqt_file(file)
+                pdbqt_contents = read_file(file)
             st.code(pdbqt_contents, language='text')
 
             process = subprocess.Popen(['bash', 'run_vina.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -194,4 +194,7 @@ elif selected_mode == "Molecular docking":
             stdout, stderr = process.communicate()
 
             # Print the output
-            st.write(f"Standard Output: {stdout.decode()}")
+            
+            with open("ligand_1/log.txt", 'r') as file:
+                log_contents = read_file(file)
+            st.code(log_contents, language='text')
