@@ -187,3 +187,4 @@ elif selected_mode == "Molecular docking":
             with open("lig.pdbqt", 'r') as file:
                 pdbqt_contents = read_pdbqt_file(file)
             st.code(pdbqt_contents, language='text')
+            subprocess.run(['python3.7', '-m', 'pip', 'install', 'vina'])
