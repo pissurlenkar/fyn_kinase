@@ -9,4 +9,4 @@ size_y = 22.5
 size_z = 22.5
 
 energy_range = 10
-exhaustiveness = 8
+exhaustiveness = 16
