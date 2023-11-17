@@ -65,7 +65,7 @@ st.markdown("<h1 style='text-align: center;'>FYN KINASE SCREENING</h1>", unsafe_
 selected_mode = st.sidebar.selectbox("Select Mode", ["QSAR", "Molecular docking"])
 
 if selected_mode == "QSAR":
-    st.markdown("<h2 style='text-align: left; font-size: 1em; font-style: italic;'>QSAR screening</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; font-size: 2em; font-style: italic;'>QSAR screening</h2>", unsafe_allow_html=True)
     # Create a radio button to choose the mode
     selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch Mode"])
 
@@ -170,7 +170,7 @@ if selected_mode == "QSAR":
                 )
 
 elif selected_mode == "Molecular docking":
-    st.markdown("<h2 style='text-align: left; font-size: 1em; font-style: italic;'>Molecular docking screening</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; font-size: 2em; font-style: italic;'>Molecular docking screening</h2>", unsafe_allow_html=True)
     selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch Mode"])
     if selected_mode == "Single Mode":
         smiles_input = st.text_input("Enter your SMILES string!")
