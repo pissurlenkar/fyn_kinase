@@ -1,9 +1,8 @@
-#!/bin/bash
+#! /bin/bash
 
-directory="$(dirname "$0")"
-
-for file in "$directory"/*.pdbqt; do
-    if [ "$file" != "$directory/protein.pdbqt" ]; then
-        vina --ligand "$file" --config config.txt
-    fi
+for f in ligand_*.pdbqt; do
+    b=`basename $f .pdbqt`
+    echo Processing ligand $b
+    mkdir -p $b
+    vina --config config.txt --ligand $f --out ${b}/out.pdbqt --log ${b}/log.txt
 done
