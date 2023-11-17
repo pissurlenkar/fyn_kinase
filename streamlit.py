@@ -111,8 +111,8 @@ if selected_mode == "QSAR":
             data_entries.extend(entries)
         if st.button('Result'):
             df1 = pd.DataFrame({'Smiles': data_entries})
-            structure_images = []
-            img_bytes_list = []
+            #structure_images = []
+            #img_bytes_list = []
             for i in range(len(df1)):
                 df1['mol'] = df1['Smiles'].apply(lambda x: Chem.MolFromSmiles(x)) 
                 df1['mol'] = df1['mol'].apply(lambda x: Chem.AddHs(x))
@@ -210,3 +210,12 @@ elif selected_mode == "Molecular docking":
                     file_name='ligand_out.pdbqt',
                     key="download_button"
                 )
+    else:
+        smiles_input = st.text_area('Enter your SMILES strings! (One SMILES per line)')
+        data_entries = []
+        if smiles_input:
+            entries = smiles_input.split('\n')        
+            data_entries.extend(entries)
+        if st.button('Result'):
+            df1 = pd.DataFrame({'Smiles': data_entries})
+        
