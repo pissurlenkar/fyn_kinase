@@ -179,7 +179,7 @@ elif selected_mode == "Molecular docking":
             #st.write('Keep calm!')
             lig = Chem.MolFromSmiles(smiles_input)
             if lig is None:
-                st.success("Your SMILES is invalid! Please check again!)
+                st.success('Your SMILES is invalid! Please check again!')
             else:
                 protonated_lig = Chem.AddHs(lig)
                 rdkit.Chem.AllChem.EmbedMolecule(protonated_lig)
