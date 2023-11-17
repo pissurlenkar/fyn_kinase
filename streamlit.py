@@ -60,6 +60,8 @@ def read_file(file):
     content = file.read()
     return content
 
+delete_files = False
+
 #st.title('FYN KINASE SCREENING')
 st.markdown("<h1 style='text-align: center;'>FYN KINASE SCREENING</h1>", unsafe_allow_html=True)
 
