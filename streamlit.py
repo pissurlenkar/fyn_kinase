@@ -195,8 +195,10 @@ elif selected_mode == "Molecular docking":
                 process = subprocess.Popen(['bash', 'run_vina.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
                 current_dir = os.getcwd()
-                file_path = f"{current_dir}/ligand_1_out.pdbqt"
-                os.remove(file_path)
+                file_path_inp = f"{current_dir}/ligand_1.pdbqt"
+                file_path_out = f"{current_dir}/ligand_1_out.pdbqt"
+                os.remove(file_path_inp)
+                os.remove(file_path_out)
     
                 # Wait for the process to finish
                 stdout, stderr = process.communicate()
