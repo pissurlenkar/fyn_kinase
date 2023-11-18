@@ -198,22 +198,6 @@ elif selected_mode == "Molecular docking":
                 stdout, stderr = process.communicate()
                 st.code(stdout.decode(), language='text')
 
-                # Convert the byte output to a string
-                output_text = stdout.decode()           
-                # Split the text into lines
-                lines = output_text.split('\n')                
-                # Initialize a variable to store the affinity value
-                affinity_mode_1 = None               
-                # Iterate through lines to find the line corresponding to mode 1
-                for line in lines:
-                    if '1' in line:  # Assuming mode 1 is in the first column
-                        # Split the line into columns
-                        columns = line.split()
-                        # Extract the affinity value
-                        affinity_mode_1 = columns[1]  # Assuming affinity is in the third column
-                        break       
-                st.write(f"Affinity corresponding to mode 1: {affinity_mode_1} kcal/mol")
-
                 current_dir = os.getcwd()
                 file_path_inp = f"{current_dir}/ligand_1.pdbqt"
                 file_path_out = f"{current_dir}/ligand_1_out.pdbqt"
