@@ -277,3 +277,6 @@ elif selected_mode == "Molecular docking":
                 file_name='Molecular docking results.csv',
                 mime='text/csv'
                 )
+
+smile_code = st_ketcher()
+st.markdown(f"Smile code: ``{smile_code}``")
