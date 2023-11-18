@@ -236,7 +236,9 @@ elif selected_mode == "Molecular docking":
                 meeko_prep.write_pdbqt_file(f"ligand_{i+1}.pdbqt")
                 process = subprocess.Popen(['bash', 'run_vina.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 current_dir = os.getcwd()
-                file_path = f"{current_dir}/ligand_{i+1}_out.pdbqt"
-                os.remove(file_path)
+                file_path_inp = f"{current_dir}/ligand_{i+1}.pdbqt"
+                file_path_out = f"{current_dir}/ligand_{i+1}_out.pdbqt"
+                os.remove(file_path_inp)
+                os.remove(file_path_out)
                 stdout, stderr = process.communicate()
                 st.code(stdout.decode(), language='text')
