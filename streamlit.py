@@ -210,7 +210,7 @@ elif selected_mode == "Molecular docking":
                         # Split the line into columns
                         columns = line.split()
                         # Extract the affinity value
-                        affinity_mode_1 = columns[2]  # Assuming affinity is in the third column
+                        affinity_mode_1 = columns[1]  # Assuming affinity is in the third column
                         break       
                 st.write(f"Affinity corresponding to mode 1: {affinity_mode_1} kcal/mol")
 
