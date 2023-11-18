@@ -177,6 +177,15 @@ if selected_mode == "QSAR":
                 )
 
 elif selected_mode == "Molecular docking":
+    st.sidebar.markdown(
+        "<div style='text-align: justify;'>"
+        "In our investigation, molecular docking between the ligand and Fyn kinase was carried out using Autodock Vina. For screening purposes, we present only the energy value corresponding to the conformation that exhibits the strongest interaction with the protein."
+        "<br><br>"
+        "It's worth noting that molecular docking results are notably slower than QSAR. Therefore, we recommend employing QSAR initially for screening potential compounds and subsequently using molecular docking to screen these selected compounds." 
+        "<br><br>"
+        "As highlighted by S. Long, et al., and S. A. Khan, et al., binding energies below -4.25 kJ/mol suggest potential interaction between the substrate and the protein, with a binding affinity below -5.0 kJ/mol indicating robust ligand-protein interactions. Furthermore, binding energies under -7.0 kJ/mol signify strong substrate-enzyme interactions. For reference, the binding energy for the positive control Staurosporine (STU-902), a well-established Fyn kinase inhibitor, is -11.9 kcal/mol."
+        "</div>",
+        unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: center; font-size: 2em; font-style: italic;'>Molecular docking screening</h2>", unsafe_allow_html=True)
     selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch Mode"])
     if selected_mode == "Single Mode":
