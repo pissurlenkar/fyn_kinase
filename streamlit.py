@@ -167,7 +167,7 @@ if selected_mode == "QSAR":
             st.download_button(
                 label="Download results as CSV file",
                 data=df3.to_csv(index=False),
-                file_name='Results.csv',
+                file_name='QSAR results.csv',
                 mime='text/csv'
                 )
 
@@ -205,7 +205,7 @@ elif selected_mode == "Molecular docking":
                 # Extract the affinity value from the line following "MODEL 1"
                 result_line = output_lines[model_1_line_index + 1]
                 result_affinity = float(result_line.split()[3])
-                st.success(f"Affinity of your ligand toward Fyn kinase: {result_affinity} kcal/mol")
+                st.success(f"The binding energy of your ligand and Fyn kinase is {result_affinity} kcal/mol")
                 
                 current_dir = os.getcwd()
                 file_path_inp = f"{current_dir}/ligand_1.pdbqt"
@@ -250,4 +250,16 @@ elif selected_mode == "Molecular docking":
                 file_path_out = f"{current_dir}/ligand_{i+1}_out.pdbqt"
                 os.remove(file_path_inp)
                 os.remove(file_path_out)
-            st.success(affinity)
+            
+            df3 = pd.DataFrame({
+                'Compound': data_entries,
+                'Binding energy (kcal/mol)': affinity,
+                })
+            st.dataframe(df3)
+            
+            st.download_button(
+                label="Download results as CSV file",
+                data=df3.to_csv(index=False),
+                file_name='Molecular docking results.csv',
+                mime='text/csv'
+                )
