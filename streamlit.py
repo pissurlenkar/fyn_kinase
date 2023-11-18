@@ -69,7 +69,7 @@ selected_mode = st.sidebar.selectbox("Select Mode", ["QSAR", "Molecular docking"
 if selected_mode == "QSAR":
     st.sidebar.markdown(
         "<div style='text-align: justify;'>"
-        "In our investigation, the classification of a compound as active or inactive for Fyn kinase was conducted using the XGBoost model. A compound was considered active if the anticipated IC<sup>50</sup> was below 1 &micro;M, and inactive if the predicted IC<sub>50</sub> equaled or exceeded 1 &micro;M."
+        "In our investigation, the classification of a compound as active or inactive for Fyn kinase was conducted using the XGBoost model. A compound was considered active if the anticipated IC<sub>50</sub> was below 1 &micro;M, and inactive if the predicted IC<sub>50</sub> equaled or exceeded 1 &micro;M."
         "</div>",
         unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: center; font-size: 2em; font-style: italic;'>QSAR screening</h2>", unsafe_allow_html=True)
