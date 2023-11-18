@@ -197,8 +197,8 @@ elif selected_mode == "Molecular docking":
                 current_dir = os.getcwd()
                 file_path_inp = f"{current_dir}/ligand_1.pdbqt"
                 file_path_out = f"{current_dir}/ligand_1_out.pdbqt"
-                os.remove(file_path_inp)
                 os.remove(file_path_out)
+                os.remove(file_path_inp)
     
                 # Wait for the process to finish
                 stdout, stderr = process.communicate()
