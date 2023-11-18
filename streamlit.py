@@ -193,30 +193,17 @@ elif selected_mode == "Molecular docking":
                 #st.code(pdbqt_contents, language='text')
     
                 process = subprocess.Popen(['bash', 'run_vina.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
+                # Wait for the process to finish
+                stdout, stderr = process.communicate()
+                st.code(stdout.decode(), language='text')
 
                 current_dir = os.getcwd()
                 file_path_inp = f"{current_dir}/ligand_1.pdbqt"
                 file_path_out = f"{current_dir}/ligand_1_out.pdbqt"
                 os.remove(file_path_out)
                 os.remove(file_path_inp)
-    
-                # Wait for the process to finish
-                stdout, stderr = process.communicate()
-                st.code(stdout.decode(), language='text')
-
-                # Print the output
-                #with open("ligand_1/log.txt", 'r') as file:
-                #   log_contents = read_file(file)
-                #st.code(log_contents, language='text')
-    
-                #current_dir = os.getcwd()
-                #file_path = f"{current_dir}/ligand_1/out.pdbqt"
-                #st.download_button(
-                #    label="Download output pdbqt file",
-                #    data=open(file_path, 'rb').read(),
-                #    file_name='ligand_out.pdbqt',
-                #    key="download_button"
-                #)
+                
     else:
         smiles_input = st.text_area('Enter your SMILES strings! (One SMILES per line)')
         data_entries = []
