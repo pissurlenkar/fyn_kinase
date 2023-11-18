@@ -205,7 +205,7 @@ elif selected_mode == "Molecular docking":
                 # Extract the affinity value from the line following "MODEL 1"
                 result_line = output_lines[model_1_line_index + 1]
                 result_affinity = float(result_line.split()[3])
-                st.write(f"Affinity for model 1: {result_affinity} kcal/mol")
+                st.write(f"Affinity of your ligand toward Fyn kinase: {result_affinity} kcal/mol")
                 
                 current_dir = os.getcwd()
                 file_path_inp = f"{current_dir}/ligand_1.pdbqt"
