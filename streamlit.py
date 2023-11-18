@@ -231,17 +231,8 @@ elif selected_mode == "Molecular docking":
                 meeko_prep.prepare(protonated_lig)
                 meeko_prep.write_pdbqt_file(f"ligand_{i+1}.pdbqt")
                 process = subprocess.Popen(['bash', 'run_vina.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                stdout, stderr = process.communicate()
-                
-                with open(f"ligand_{i+1}/log.txt", 'r') as file:
-                    log_contents = read_file(file)
-                st.code(log_contents, language='text')
-    
                 current_dir = os.getcwd()
-                file_path = f"{current_dir}/ligand_{i+1}/out.pdbqt"
-                st.download_button(
-                    label="Download output pdbqt file",
-                    data=open(file_path, 'rb').read(),
-                    file_name=f'ligand_{i+1}_out.pdbqt',
-                    key="download_button"
-                )
+                file_path = f"{current_dir}/ligand_{i+1}_out.pdbqt"
+                os.remove(file_path)
+                stdout, stderr = process.communicate()
+                st.code(stdout.decode(), language='text')
