@@ -67,7 +67,7 @@ st.markdown("<h1 style='text-align: center;'>FYN KINASE SCREENING</h1>", unsafe_
 selected_mode = st.sidebar.selectbox("Select Mode", ["QSAR", "Molecular docking"])
 
 if selected_mode == "QSAR":
-    st.sidebar.markdown("In our investigation, the classification of a compound as active or inactive for Fyn kinase was conducted using the XGBoost model. A compound was deemed active if the anticipated IC<sup>50</sup> was below 1 &micro;M, and inactive if the predicted IC<sub>50</sub> equaled or exceeded 1 &micro;M.", unsafe_allow_html=True)
+    st.sidebar.markdown("In our investigation, the classification of a compound as active or inactive for Fyn kinase was conducted using the XGBoost model. A compound was deemed active if the anticipated IC<sub>50</sub> was below 1 &micro;M, and inactive if the predicted IC<sub>50</sub> equaled or exceeded 1 &micro;M.", unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: center; font-size: 2em; font-style: italic;'>QSAR screening</h2>", unsafe_allow_html=True)
     # Create a radio button to choose the mode
     selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch Mode"])
