@@ -205,7 +205,7 @@ elif selected_mode == "Molecular docking":
                 # Extract the affinity value from the line following "MODEL 1"
                 result_line = output_lines[model_1_line_index + 1]
                 result_affinity = float(result_line.split()[3])
-                st.write(f"Affinity of your ligand toward Fyn kinase: {result_affinity} kcal/mol")
+                st.success(f"Affinity of your ligand toward Fyn kinase: {result_affinity} kcal/mol")
                 
                 current_dir = os.getcwd()
                 file_path_inp = f"{current_dir}/ligand_1.pdbqt"
@@ -216,6 +216,7 @@ elif selected_mode == "Molecular docking":
     else:
         smiles_input = st.text_area('Enter your SMILES strings! (One SMILES per line)')
         data_entries = []
+        affinity = []
         if smiles_input:
             entries = smiles_input.split('\n')        
             data_entries.extend(entries)
@@ -235,8 +236,18 @@ elif selected_mode == "Molecular docking":
                 stdout, stderr = process.communicate()
                 st.code(stdout.decode(), language='text')
 
+                with open(f'ligand_{i+1}_out.pdbqt', 'r') as file:
+                    output_lines = file.readlines()
+                # Find the line that starts with "MODEL 1"
+                model_1_line_index = next(index for index, line in enumerate(output_lines) if line.startswith('MODEL 1'))
+                # Extract the affinity value from the line following "MODEL 1"
+                result_line = output_lines[model_1_line_index + 1]
+                result_affinity = float(result_line.split()[3])
+                affinity.append(result_affinity)
+                
                 current_dir = os.getcwd()
                 file_path_inp = f"{current_dir}/ligand_{i+1}.pdbqt"
                 file_path_out = f"{current_dir}/ligand_{i+1}_out.pdbqt"
                 os.remove(file_path_inp)
                 os.remove(file_path_out)
+            st.success(affinity)
