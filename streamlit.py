@@ -198,6 +198,15 @@ elif selected_mode == "Molecular docking":
                 stdout, stderr = process.communicate()
                 st.code(stdout.decode(), language='text')
 
+                with open('ligand_1_out.pdbqt', 'r') as file:
+                    output_lines = file.readlines()
+                # Find the line that starts with "MODEL 1"
+                model_1_line_index = next(index for index, line in enumerate(output_lines) if line.startswith('MODEL 1'))
+                # Extract the affinity value from the line following "MODEL 1"
+                result_line = output_lines[model_1_line_index + 1]
+                result_affinity = float(result_line.split()[3])
+                st.write(f"Affinity for model 1: {result_affinity} kcal/mol")
+                
                 current_dir = os.getcwd()
                 file_path_inp = f"{current_dir}/ligand_1.pdbqt"
                 file_path_out = f"{current_dir}/ligand_1_out.pdbqt"
