@@ -65,7 +65,7 @@ def read_file(file):
 #st.title('FYN KINASE SCREENING')
 st.markdown("<h1 style='text-align: center;'>FYN KINASE SCREENING</h1>", unsafe_allow_html=True)
 
-st.markdown("<h2 style='text-align: left; font-size: 2em; font-style: italic;'>In case you want to draw your own molecules by yourself</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: left; font-size: 1.5em; font-style: italic;'>In case you want to draw your own molecules by yourself</h2>", unsafe_allow_html=True)
 smile_code = st_ketcher()
 st.markdown(f"Smile code: ``{smile_code}``")
 
