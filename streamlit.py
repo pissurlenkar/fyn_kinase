@@ -196,7 +196,7 @@ elif selected_mode == "Molecular docking":
     
                 # Wait for the process to finish
                 stdout, stderr = process.communicate()
-                st.code(stdout.decode(), language='text')
+                #st.code(stdout.decode(), language='text')
 
                 with open('ligand_1_out.pdbqt', 'r') as file:
                     output_lines = file.readlines()
@@ -234,7 +234,7 @@ elif selected_mode == "Molecular docking":
                 process = subprocess.Popen(['bash', 'run_vina.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
                 stdout, stderr = process.communicate()
-                st.code(stdout.decode(), language='text')
+                #st.code(stdout.decode(), language='text')
 
                 with open(f'ligand_{i+1}_out.pdbqt', 'r') as file:
                     output_lines = file.readlines()
