@@ -278,5 +278,6 @@ elif selected_mode == "Molecular docking":
                 mime='text/csv'
                 )
 
+from streamlit_ketcher import st_ketcher
 smile_code = st_ketcher()
 st.markdown(f"Smile code: ``{smile_code}``")
