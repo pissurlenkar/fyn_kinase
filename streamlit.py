@@ -63,7 +63,7 @@ def read_file(file):
     return content
     
 #st.title('FYN KINASE SCREENING')
-st.markdown("<h1 style='text-align: center;'>FynPred - FYN KINASE INHIBITORS SCREENING</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; font-size: 2.5em'>FynPred - FYN KINASE INHIBITORS SCREENING</h1>", unsafe_allow_html=True)
 
 #st.markdown("<h2 style='text-align: left; font-size: 1.5em; font-style: italic;'>Convert 2D structures to SMILES</h2>", unsafe_allow_html=True)
 #smile_code = st_ketcher()
