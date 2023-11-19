@@ -29,7 +29,7 @@ import meeko
 from meeko import MoleculePreparation
 import subprocess
 import re
-from streamlit_ketcher import st_ketcher
+#from streamlit_ketcher import st_ketcher
 
 # Calculate Application Domain
 df = pd.read_csv('Fyn_kinase.csv')
@@ -65,9 +65,9 @@ def read_file(file):
 #st.title('FYN KINASE SCREENING')
 st.markdown("<h1 style='text-align: center;'>FYN KINASE SCREENING</h1>", unsafe_allow_html=True)
 
-st.markdown("<h2 style='text-align: left; font-size: 1.5em; font-style: italic;'>Convert 2D structures to SMILES</h2>", unsafe_allow_html=True)
-smile_code = st_ketcher()
-st.markdown(f"Smile code: ``{smile_code}``")
+#st.markdown("<h2 style='text-align: left; font-size: 1.5em; font-style: italic;'>Convert 2D structures to SMILES</h2>", unsafe_allow_html=True)
+#smile_code = st_ketcher()
+#st.markdown(f"Smile code: ``{smile_code}``")
 
 selected_mode = st.sidebar.selectbox("Select Mode", ["QSAR", "Molecular docking"])
 
