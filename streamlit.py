@@ -77,7 +77,7 @@ if selected_mode == "QSAR":
         "In our investigation, the classification of a compound as active or inactive for Fyn kinase was conducted using the XGBoost model. A compound was considered active if the anticipated IC<sub>50</sub> was below 1 &micro;M, and inactive if the predicted IC<sub>50</sub> equaled or exceeded 1 &micro;M."
         "</div>",
         unsafe_allow_html=True)
-    st.markdown("<h2 style='text-align: center; font-size: 2em; font-style: italic;'>QSAR screening</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; font-size: 2em; font-style: italic;'>QSAR</h2>", unsafe_allow_html=True)
     # Create a radio button to choose the mode
     selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch Mode"])
 
@@ -191,7 +191,7 @@ elif selected_mode == "Molecular docking":
         "For reference, the binding energy for the positive control Staurosporine (STU-902), a well-established Fyn kinase inhibitor, is -12.2 kcal/mol."
         "</div>",
         unsafe_allow_html=True)
-    st.markdown("<h2 style='text-align: center; font-size: 2em; font-style: italic;'>Molecular docking screening</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; font-size: 2em; font-style: italic;'>Molecular docking</h2>", unsafe_allow_html=True)
     selected_mode = st.selectbox("Select Mode of Screening", ["Single Mode", "Batch Mode"])
     if selected_mode == "Single Mode":
         smiles_input = st.text_input("Enter your SMILES string!")
