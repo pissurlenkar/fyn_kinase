@@ -282,3 +282,12 @@ elif selected_mode == "Molecular docking":
                 file_name='Molecular docking results.csv',
                 mime='text/csv'
                 )
+
+st.markdown(
+    """
+    <div style="position: fixed; bottom: 8px; width: 100%; text-align: left; padding-left: 5cm;">
+        Created by Nguyen-Van Phuong, et al. (2023)
+    </div>
+    """,
+    unsafe_allow_html=True
+)
