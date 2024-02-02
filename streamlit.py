@@ -102,7 +102,7 @@ if selected_mode == "QSAR":
             distances_screen,_ = knn_model.kneighbors(X)
             Di = np.mean(distances_screen)
             if Di > threshold:
-                result = 'Your compound is out of our application domain'
+                result = 'Your compound is out of our application domain. Please consider using molecular docking for screening this compound!'
             else:
                 # Load pretrained model
                 model = joblib.load('model_fyn.pkl')
