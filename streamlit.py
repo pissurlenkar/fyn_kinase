@@ -188,8 +188,8 @@ elif selected_mode == "Molecular docking":
         "In our investigation, molecular docking between the ligand and Fyn kinase was carried out using Autodock Vina. For screening purposes, we present only the energy value corresponding to the conformation that exhibits the strongest interaction with the protein."
         "<br><br>"
         "It's worth noting that molecular docking results are notably slower than QSAR. Therefore, we recommend employing QSAR initially for screening potential compounds and subsequently using molecular docking to screen these selected compounds." 
-        "<br><br>"
-        "For reference, the binding energy for the positive control Staurosporine (STU-902), a well-established Fyn kinase inhibitor, is -12.2 kcal/mol."
+        #"<br><br>"
+        #"For reference, the binding energy for the positive control Staurosporine (STU-902), a well-established Fyn kinase inhibitor, is -12.2 kcal/mol."
         "</div>",
         unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: left; font-size: 2em; font-style: italic;'>Molecular docking</h2>", unsafe_allow_html=True)
